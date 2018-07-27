@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>exhibit A | Login</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <style type="text/css">
+        body{
+            background-color: #f8f9fa;
+        }
+        .navbar{
+            background-color: #007bff9e;
+            height: 10vh;
+        }
+        #A{
+            color: white;
+        }
+        .navbar-brand{
+            color: snow;
+        }
+        @media(min-width: 900px){
+            .container{
+                margin: 200px;
+                width: 700px;
+                padding: 50px;
+                background-color: #007bff26;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" href="home.php">
+        exhibit <span id="A"><b>A</b></span>
+    </a>
+</nav>
+<div class="container">
+    <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+  <button type="button" id="login" class="btn btn-primary btn-sm">Submit</button>
+</form>
+<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap-notify.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap-notify.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#login').click(function(){
+            $.notify("Enter: Zoom Down and InExit: Zoom Up and Out", {
+    animate: {
+        enter: 'animated zoomInDown',
+        exit: 'animated zoomOutUp'
+    }
+});
+        });
+    });
+</script>
+</div>
+</body>
+</html>

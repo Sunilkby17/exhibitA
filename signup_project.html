@@ -1,0 +1,159 @@
+<!doctype html>
+    <html>
+<head lang="en">
+    <title>Sign up</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+    <style>
+        #A{
+            color:#518CFF;   
+        }
+        .navbar{
+            height:90px;
+        }
+        .container{
+            top:50px;
+            position:relative;
+        }
+        .grounders{
+            height:165px;
+            top:100px;
+            position:relative;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="home.php">
+        exhibit <span id="A"><b>A</b></span>
+    </a>
+</nav>
+
+<form class="container" id="needs-validation" novalidate name="form" method="POST">
+    <div class="row">
+        <div class="col-sm-10 mb-3">
+            <label for="validationCustom01">User name</label>
+            <input type="text" class="form-control" name="username" pattern="[a-z,A-Z,0-9, ]{3,}" id="username" placeholder="User name"  required>
+            <div class="invalid-feedback">
+                Please provide a username without special symbols.
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-10">
+            <label for="inputEmail4" >Email</label>
+            <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" placeholder="Email" required>
+            <div class="invalid-feedback">
+                Please enter email
+            </div>
+        </div>
+        <div class="form-group col-sm-10">
+            <label for="inputPassword4">Password</label>&nbsp;<i class="fa fa-eye-slash" id="close" onclick="see()" style="color:#3c93ff;" aria-hidden="true"></i>
+            <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" name="password" placeholder="Password" required>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+                Your password must be 8-20 characters long, contain capital-small letters and numbers, and must not contain spaces, special characters, or emoji.
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom03">Phone</label>
+            <input type="text" class="form-control" id="phone" min="7000000000" max="9999999999" pattern="[0-9]{10}" name="phone" placeholder="Phone number" required>
+            <div class="invalid-feedback">
+                Please provide a phone number.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationCustom05">Gender</label>
+            <select id="gender" class="form-control" name="gender" required>
+                <option value="">Iam...</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Others</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select one
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationCustom04">Birthday</label>
+            <input type="date" class="form-control" id="birthday" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" name="bdate" placeholder="dd/mm/yyyy" required>
+            <div class="invalid-feedback">
+                Please provide a valid date.
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-sm" id="signup" name="submit" type="button">Submit form</button>
+</form>
+
+<div class="grounders" style="background-color: #42af74">
+    <center><h2 style="color: #f8f9fa; padding-top: 70px;" id="ground" class="chng">Signup and join the community of Arts</h2></center>
+</div>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            your account created!
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/popper.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/redirect.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            var form = document.getElementById('needs-validation');
+            var signup = document.getElementById('signup');
+            signup.addEventListener('click', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                else{
+                    $.post('mongodb.php',
+                        {signup: true, username: $('#username').val(), email: $('#email').val(), password: $('#password').val(), phone: $('#password').val(), gender: $('#gender').val(), bdate: $('#birthday').val()},
+                        function(data, status){
+                            if(data==0)
+                                alert('signup failed');
+                            else $.redirect('login.html',{});
+                        });
+                }
+                form.classList.add('was-validated');
+                
+            }, false);
+        }, false);
+    })();
+</script>
+<script>
+
+    function change() {
+        document.getElementById('ground').innerHTML='Have a good time';
+    }
+   function see(){
+
+        $var = document.getElementById('close');
+       if($var.className =='fa fa-eye-slash')
+           document.getElementById('close').className='fa fa-eye';
+       else
+           document.getElementById('close').className='fa fa-eye-slash';
+       $check = document.getElementById('password');
+        if($check.type=='password')
+            $check.type='text';
+        else
+            $check.type='password';
+    }
+</script>
+</body>
+</html>
